@@ -11,6 +11,8 @@ define accounts::account(
   $ssh_authorized_key_title = $::accounts::ssh_authorized_key_title,
   $shell                    = $::accounts::shell,
   $home                     = undef,
+  $uid                      = undef,
+  $gid                      = undef,
 ) {
   $account = $user # for strformat mapping...
   if $user =~ /^@(\S+)$/ {
@@ -30,6 +32,8 @@ define accounts::account(
         ssh_authorized_key_title => $ssh_authorized_key_title,
         shell                    => $shell,
         home                     => $home,
+        uid                      => $uid,
+        gid                      => $gid,
       }
     )
   } else {
@@ -52,6 +56,8 @@ define accounts::account(
           managehome => true,
           membership => $groups_membership,
           shell      => $shell,
+          uid        => $uid,
+          gid        => $gid,
         },
         $::accounts::users[$name]
       )
