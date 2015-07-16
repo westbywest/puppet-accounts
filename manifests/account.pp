@@ -13,6 +13,7 @@ define accounts::account(
   $home                     = undef,
   $uid                      = undef,
   $gid                      = undef,
+  $password                 = undef,
 ) {
   $account = $user # for strformat mapping...
   if $user =~ /^@(\S+)$/ {
@@ -34,6 +35,7 @@ define accounts::account(
         home                     => $home,
         uid                      => $uid,
         gid                      => $gid,
+        password                 => $password,
       }
     )
   } else {
@@ -47,12 +49,17 @@ define accounts::account(
         undef   => "/home/${$user}",
         default => $home,
       }
+      $_password = $password ? {
+        undef   => "!",
+        default => $password,
+      }
       $hash = merge(
         {
           ensure     => $ensure,
           comment    => $comment,
           groups     => $groups,
           home       => $_home,
+          password   => $_password,
           managehome => true,
           membership => $groups_membership,
           shell      => $shell,
