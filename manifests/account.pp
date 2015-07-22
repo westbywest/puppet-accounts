@@ -49,17 +49,13 @@ define accounts::account(
         undef   => "/home/${$user}",
         default => $home,
       }
-      $_password = $password ? {
-        undef   => '!',
-        default => $password,
-      }
       $hash = merge(
         {
           ensure     => $ensure,
           comment    => $comment,
           groups     => $groups,
           home       => $_home,
-          password   => $_password,
+          password   => $password,
           managehome => true,
           membership => $groups_membership,
           shell      => $shell,
