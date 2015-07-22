@@ -14,6 +14,10 @@ define accounts::account(
   $uid                      = undef,
   $gid                      = undef,
   $password                 = undef,
+  $before                   = undef,
+  $require                  = undef,
+  $notify                   = undef,
+  $subscribe                = undef,
 ) {
   $account = $user # for strformat mapping...
   if $user =~ /^@(\S+)$/ {
@@ -36,6 +40,10 @@ define accounts::account(
         uid                      => $uid,
         gid                      => $gid,
         password                 => $password,
+        before                   => $before,
+        require                  => $require,
+        notify                   => $notify,
+        subscribe                => $subscribe
       }
     )
   } else {
@@ -61,6 +69,10 @@ define accounts::account(
           shell      => $shell,
           uid        => $uid,
           gid        => $gid,
+          before     => $before,
+          require    => $require,
+          notify     => $notify,
+          subscribe  => $subscribe
         },
         $::accounts::users[$name]
       )
