@@ -50,7 +50,7 @@ define accounts::account(
         default => $home,
       }
       $_password = $password ? {
-        undef   => "!",
+        undef   => '!',
         default => $password,
       }
       $hash = merge(
